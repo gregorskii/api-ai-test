@@ -5,6 +5,9 @@ const argv = yargs.describe('Gulp Tasks')
   .option('message', {
     describe: 'The message to send to the bot'
   })
+  .option('voice', {
+    describe: 'Whether to use voice input'
+  })
   .help('h')
   .alias('h', 'help')
   .argv
