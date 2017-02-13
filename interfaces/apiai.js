@@ -1,21 +1,32 @@
 const apiai = require('apiai');
 
-const app = apiai(process.env.API_AI_CLIENT_KEY);
+module.exports = (logger) => {
+  let app;
 
-module.exports.makeRequest = (text) => {
-  return new Promise((resolve, reject) => {
-    request = app.textRequest(text, {
-      sessionId: '1'
-    });
+  if (process.env.API_AI_CLIENT_KEY) {
+    app = apiai(process.env.API_AI_CLIENT_KEY);
+  } else {
+    logger.error('Missing "API_AI_CLIENT_KEY" exiting.')
+    process.exit();
+  }
 
-    request.on('response', (response) => {
-        resolve(response);
-    });
+  return {
+    makeRequest: (text) => {
+      return new Promise((resolve, reject) => {
+        request = app.textRequest(text, {
+          sessionId: '1'
+        });
 
-    request.on('error', (error) => {
-      reject(error);
-    });
+        request.on('response', (response) => {
+            resolve(response);
+        });
 
-    request.end();
-  });
-};
+        request.on('error', (error) => {
+          reject(error);
+        });
+
+        request.end();
+      });
+    }
+  }
+}

@@ -4,7 +4,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV == 'local') {
 
 const argv = require('./env');
 const logger = require('./interfaces/logger')();
-const makeRequest = require('./interfaces/apiai').makeRequest;
+const makeRequest = require('./interfaces/apiai')(logger).makeRequest;
 
 makeRequest(argv.message || 'HI!')
   .then(
