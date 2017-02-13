@@ -29,6 +29,16 @@ Replace `###` with your accounts Client API key, Google project, and Google Serv
 
 Run:
 
+Text:
+
 ```
-node index.js
+node index.js --message="HI!"
 ```
+
+Voice:
+
+```
+node index.js --voice
+```
+
+Currently the command prompt will record 3 seconds of audio, send it off and console the result, and response message.
