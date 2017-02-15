@@ -20,7 +20,7 @@ module.exports = (logger) => {
             return operation.promise();
           }
         ).then((result) => {
-          console.log(result);
+          logger.info('SPEECH RESULT', result);
           let transcription = result[0];
           logger.info(`Transcription: ${transcription}`);
           return transcription;
