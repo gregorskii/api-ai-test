@@ -15,6 +15,7 @@ const handleResponse = (result) => {
     Object.hasOwnProperty.call(result.result.fulfillment, 'speech')
   ) {
     logger.info(`RESPONSE: ${result.result.fulfillment.speech}`);
+    return;
   }
 }
 
@@ -46,13 +47,13 @@ if (argv.message) {
 
   audio.record(filename, 3000).then(
     () => {
-      speech.syncRecognize(filename)
+      return speech.recognize(filename)
         .then(
           (transcription) => {
-            apiai.makeRequest(transcription)
+            return apiai.makeRequest(transcription)
               .then(
                 (result) => {
-                  handleResponse(result);
+                  return handleResponse(result);
                 },
                 handleGeneralError
               )

@@ -11,7 +11,7 @@ module.exports = (logger) => {
           { encoding: 'binary' }
         );
 
-        logger.info(`recording for ${time} seconds`);
+        logger.info(`recording for ${time/1000} seconds`);
         record.start({
           sampleRate: process.env.AUDIO_SAMPLE_RATE
         }).pipe(file);

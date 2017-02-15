@@ -7,29 +7,25 @@ module.exports = (logger) => {
   });
 
   return {
-    syncRecognize: (filename, encoding, sampleRate) => {
-      return new Promise((resolve, reject) => {
-        const request = {
-          encoding: encoding || process.env.AUDIO_ENCODING,
-          sampleRate: sampleRate || parseInt(process.env.AUDIO_SAMPLE_RATE)
-        };
+    recognize: (filename, encoding, sampleRate) => {
+      const request = {
+        encoding: encoding || process.env.AUDIO_ENCODING,
+        sampleRate: sampleRate || parseInt(process.env.AUDIO_SAMPLE_RATE)
+      };
 
-        // Detects speech in the audio file
-        speech.recognize(filename, request)
-          .then(
-            (result) => {
-              logger.info(result);
-              const transcription = result[0];
-
-              logger.info(`Transcription: ${transcription}`);
-              resolve(transcription);
-            },
-            (error) => {
-              reject(error);
-            }
-          )
-        ;
-      });
+      // Detects speech in the audio file
+      return speech.startRecognition(filename, request)
+        .then((result) => {
+            const operation = result[0];
+            return operation.promise();
+          }
+        ).then((result) => {
+          console.log(result);
+          let transcription = result[0];
+          logger.info(`Transcription: ${transcription}`);
+          return transcription;
+        })
+      ;
     }
   }
 }
