@@ -54,7 +54,7 @@ The project contains boilerplate Mocha tests that can be setup to make requests 
 Run the unit tests with:
 
 ```
-nam run test
+npm run test
 ```
 
 **Configuration:**
