@@ -14,12 +14,13 @@
     "bunyan": "^1.8.5",
     "bunyan-format": "^0.2.1",
     "dotenv": "^4.0.0",
+    "lodash": "^4.17.4",
     "node-record-lpcm16": "^0.2.0",
-    "yargs": "^6.6.0",
-    "lodash": "^4.17.4"
+    "yargs": "^6.6.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.1.0"
+    "mocha": "^3.1.0",
+    "mocha-logger": "^1.0.5"
   }
 }

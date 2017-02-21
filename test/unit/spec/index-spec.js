@@ -1,4 +1,5 @@
 const chai = require('chai');
+const mlog = require('mocha-logger');
 
 const makeRequest = require('./helpers/makeRequest');
 const setupMessages = require('./helpers/setupMessages');
@@ -27,7 +28,11 @@ describe('basic messages', function() {
         expect(this.response).to.have.ownPropertyDescriptor('result');
         expect(this.response.result).to.have.ownPropertyDescriptor('fulfillment');
         expect(this.response.result.fulfillment).to.have.ownPropertyDescriptor('speech');
-        expect(this.response.result.fulfillment).to.have.ownPropertyDescriptor('displayText');
+        //expect(this.response.result.fulfillment).to.have.ownPropertyDescriptor('displayText');
+
+        if (process.env.LOG_RESPONSES == 'true') {
+          mlog.log(this.response.result.fulfillment.speech);
+        }
 
         handleAssertions(this.response.result.fulfillment.speech);
       });

@@ -24,7 +24,7 @@ module.exports = (logger) => {
       language: 'en'
     });
   } else {
-    logger.error('Missing "API_AI_CLIENT_KEY" exiting.')
+    logger.error('Missing "API_AI_CLIENT_KEY" exiting.');
     process.exit();
   }
 
