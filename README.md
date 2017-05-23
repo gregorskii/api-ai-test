@@ -65,7 +65,7 @@ Example:
 
 ```
 module.exports = [
-	'Hi!'
+    'Hi!'
 ];
 ```
 
