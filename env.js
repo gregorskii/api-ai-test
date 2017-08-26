@@ -1,6 +1,6 @@
 const yargs = require('yargs');
 
-const argv = yargs.describe('Gulp Tasks')
+const argv = yargs.describe('API AI test')
   .usage('Usage: $0 --message=[some text]')
   .option('message', {
     describe: 'The message to send to the bot'
