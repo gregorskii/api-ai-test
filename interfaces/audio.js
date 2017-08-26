@@ -7,20 +7,26 @@ module.exports = (logger) => {
   return {
     record: (filename, time = defaultTime) => {
       return new Promise((resolve, reject) => {
-        const file = fs.createWriteStream(filename,
+        const file = fs.createWriteStream(
+          filename,
           { encoding: 'binary' }
         );
 
-        logger.info(`recording for ${time/1000} seconds`);
-        record.start({
-          sampleRate: process.env.AUDIO_SAMPLE_RATE
-        }).pipe(file);
+        if (fs.existsSync(filename)) {
+          logger.info(`recording for ${time/1000} seconds`);
+          record.start({
+            sampleRate: process.env.AUDIO_SAMPLE_RATE,
+            verbose: false
+          }).pipe(file);
 
-        // Stop recording after <time> seconds
-        setTimeout(function () {
-          record.stop();
-          resolve();
-        }, time);
+          // Stop recording after <time> seconds
+          setTimeout(function () {
+            record.stop();
+            resolve();
+          }, time);
+        } else {
+          reject(new Error("File is not writable, or error writing sound file."));
+        }
       });
     }
   }
