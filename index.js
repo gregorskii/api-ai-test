@@ -19,6 +19,17 @@ const handleResponse = (result) => {
   }
 }
 
+const makeApiAiRequest = (message) => {
+  return apiai.makeRequest(message)
+    .then(
+      (result) => {
+        logger.info(result);
+        handleResponse(result);
+      },
+      handleGeneralError
+  );
+}
+
 const handleGeneralError = (error) => {
   logger.error(error);
 };
@@ -31,37 +42,23 @@ if (argv.message) {
     process.exit();
   }
 
-  apiai.makeRequest(argv.message)
-    .then(
-      (result) => {
-        logger.info(result);
-        handleResponse(result);
-      },
-      handleGeneralError
-    )
-  ;
+  makeApiAiRequest(argv.message);
 } else if (argv.voice) {
   let filename = './swap/test.wav';
 
   logger.info('Using voice');
 
-  audio.record(filename, 3000).then(
-    () => {
+  audio.record(filename, 3000)
+    .then(() => {
       return speech.recognize(filename)
-        .then(
-          (transcription) => {
-            return apiai.makeRequest(transcription)
-              .then(
-                (result) => {
-                  return handleResponse(result);
-                },
-                handleGeneralError
-              )
-            ;
-          },
-          handleGeneralError
-        )
-      ;
-    }
+        .then((transcription) => {
+          if (transcription) {
+            return makeApiAiRequest(transcription);
+          }
+        },
+        handleGeneralError
+      );
+    },
+    handleGeneralError
   );
 }
