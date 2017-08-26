@@ -64,9 +64,11 @@ The messages sent to the API are custom to each Agent, in order to define the te
 Example:
 
 ```
-module.exports = [
+module.exports = () => {
+  return [
     'Hi!'
-];
+  ];
+};
 ```
 
 The assertions run against the messages are custom to each Agent.
