@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/speech": "^0.6.0",
+    "@google-cloud/speech": "^0.10.2",
     "apiai": "^4.0.0",
     "bunyan": "^1.8.5",
     "bunyan-format": "^0.2.1",
