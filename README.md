@@ -25,6 +25,7 @@ GOOGLE_CLOUD_PROJECT=###
 GOOGLE_CLOUD_SA_FILE=###
 AUDIO_ENCODING=LINEAR16
 AUDIO_SAMPLE_RATE=16000
+LOG_RESPONSES=true
 ```
 
 Replace `###` with your accounts Client API key, Google project, and Google Service Account filepath (relative to index).
