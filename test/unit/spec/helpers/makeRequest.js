@@ -5,7 +5,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV == 'local') {
 const path = require('path');
 const cwd = process.cwd();
 
-const logger = require(path.join(cwd, 'interfaces', 'logger'))(false);
+const logger = require(path.join(cwd, 'interfaces', 'logger'))(false, 'ERROR');
 const apiai = require(path.join(cwd, 'interfaces', 'apiai'))(logger);
 
 module.exports = (message) => {
