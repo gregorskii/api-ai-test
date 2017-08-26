@@ -11,4 +11,6 @@ module.exports = (silence) => {
   if (!silence || process.env.SILENCE !== '') {
     log.level(bunyan.FATAL + 1)
   }
+  
+  return log;
 };
